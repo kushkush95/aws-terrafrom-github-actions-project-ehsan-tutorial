@@ -1,4 +1,4 @@
-name: Create an S3 bucket
+name: Copying ot S3 Bucket
 
 on:
   push:
@@ -51,3 +51,8 @@ jobs:
           echo "Listing S3 Buckets"
           aws s3 ls
 
+      - name: Copy Files to S3
+        run: |
+          aws s3 cp index.html s3://${{ secrets.BUCKET_NAME }}/index.html
+          aws s3 cp index.html --recursive images/ s3://${{ secrets.BUCKET_NAME }}/images/
+          aws s3 cp index.html --recursive styles/ s3://${{ secrets.BUCKET_NAME }}/styles/
